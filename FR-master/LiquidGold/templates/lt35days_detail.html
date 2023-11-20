@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %} {% load crispy_forms_tags %}
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <title>Diesel Request</title>
+  </head>
+  {% block content %}
+
+  <div class="container">
+    <a
+      href="{% url 'pending_requestlist'  %}"
+      class="btn btn-primary"
+      name="unapprove"
+    ></a>
+    <br />
+    <hr />
+    <h3>{{lt35days_request.sudo_name}} {{lt35days_request.sudo_name}}</h3>
+
+    <div class="row">
+      <div class="col-6 col-sm-2">Site ID:-</div>
+      <div class="col-6 col-sm-3">{{ lt35days_request.site.name }}</div>
+
+      <!-- Force next columns to break to new line -->
+      <div class="w-100"></div>
+
+      <div class="col-4 col-sm-2">Site Name:-</div>
+      <div class="col-6 col-sm-3">{{ lt35days_request.site.sudo_name }}</div>
+
+      <div class="w-100"></div>
+
+      <div class="col-4 col-sm-2">Site Engineer Name:-</div>
+      <div class="col-6 col-sm-3">{{ lt35days_request.engineer }}</div>
+
+      <div class="w-100"></div>
+
+      <div class="w-100"></div>
+
+      <div class="col-4 col-sm-2">Comment on PHCN:-</div>
+      <div class="col-6 col-sm-3">{{ lt35days_request.phcn_comment}}</div>
+
+      <div class="w-100"></div>
+
+      <div class="w-100"></div>
+
+      <div class="col-4 col-sm-2">Quantity Requested:-</div>
+      <div class="col-6 col-sm-3">
+        {{lt35days_request.quantity_required}} Litres
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-4 col-sm-2">No of days since last request:-</div>
+      <div class="col-6 col-sm-3">{{lt35days_request.no_days}} days</div>
+      <div class="w-100"></div>
+
+      <div class="col-4 col-sm-2">Engineer's Justitification:-</div>
+      <div class="col-6 col-sm-3">{{lt35days_request.justification}}</div>
+      <div class="w-100"></div>
+      <div class="col-4 col-sm-2">Manager's Justitification:-</div>
+      <div class="col-6 col-sm-3">{{lt35days_request.mng_justfication}}</div>
+      <div class="w-100"></div>
+      <div class="col-4 col-sm-2">Approve:</div>
+      <div class="col-6 col-sm-3">{{lt35days_request.approve}}</div>
+    </div>
+
+    <br />
+    <hr />
+    <div>
+      {% if lt35days_request.request_approved %}
+      <a
+        href="{% url 'requestunapprove' lt35days_request.id %}"
+        class="btn btn-primary"
+        name="unapprove"
+        >MANAGER UNAPPROVE
+      </a>
+      {% else %}
+      <a
+        href="{% url 'approve' lt35days_request.id %}"
+        class="btn btn-success"
+        name="approve"
+        >MANAGER APPROVE
+      </a>
+      {% endif %} {% comment %}
+      <a
+        href="{% url 'requestcancel' request_list.id %}"
+        class="btn btn-info"
+        name="cancel"
+        >CANCEL</a
+      >
+      {% endcomment %}
+      <a
+        href="{% url 'reject' lt35days_request.id %}"
+        class="btn btn-danger"
+        name="reject"
+        >MANAGER REJECT</a
+      >
+    </div>
+  </div>
+  {% endblock %}
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"
+  ></script>
+</html>

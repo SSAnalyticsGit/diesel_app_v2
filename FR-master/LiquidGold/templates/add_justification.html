@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Justification Form</title>
+  </head>
+  <body>
+    <h1>Justification Form</h1>
+    {% comment %} {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %} {% endcomment %}
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
